@@ -17,14 +17,21 @@ class UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(user_params)
-    
-    if @user.save
-      render json: @user, status: :created, location: @user
-    else
-      render json: @user.errors, status: :unprocessable_entity
+    begin
+      if @user.save
+        render :json => @user, :except=>  [:password_digest]    
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
+    rescue Mongo::Error => e
+      if e.message.include? 'E11000'
+        render json: { error: 'Duplicate user error' }
+      else
+        raise e
+      end
     end
   end
-
+  
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
