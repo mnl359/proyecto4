@@ -5,7 +5,7 @@
         <span v-if="routes.error" class="text-danger">ERROR: {{routes.error}}</span>
         <ul v-if="routes.items">
             <li v-for="route in routes.items">
-                {{route.name}}
+		<router-link :to="{ name: 'ShowRoute', params: { id: route._id.$oid } }"> {{route.name}} </router-link>
             </li>
         </ul>
         <p>
@@ -28,6 +28,12 @@
 
 <script>
 export default {
+    data () {
+        return {
+            name : '',
+            submitted: false
+        }
+    },
     computed: {
         user () {
             return this.$store.state.authentication.user;
