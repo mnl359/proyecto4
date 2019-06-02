@@ -1,9 +1,11 @@
 import { routeService } from '../_services';
+import { router } from '../_helpers';
 
 export const routes = {
     namespaced: true, 
     state: {
-        all : {}
+        all : {},
+        create: {}
     },
     actions: {
         getAll({ commit }) {
@@ -14,6 +16,13 @@ export const routes = {
                     routes => commit('getAllSuccess', routes),
                     error => commit('getAllFailure', error)
                 );
+        },
+        createRoute({ commit, dispatch }, { name }) {
+            commit('createRouteRequest');
+
+            routeService.createRoute(name);
+            commit('createRouteSuccess');
+            dispatch('routes/getAll', {}, { root: true });
         }
     },
     mutations: {
@@ -25,6 +34,12 @@ export const routes = {
         },
         getAllFailure(state, error) {
             state.all = { error };
+        },
+        createRouteRequest(state) {
+            state.create = { saving: true };
+        },
+        createRouteSuccess(state) {
+            state.create = {};
         }
     }
 }

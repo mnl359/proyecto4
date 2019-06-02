@@ -1,9 +1,5 @@
 <template>
     <div>
-        <div class="alert alert-info">
-            Email: test<br />
-            Password: test
-        </div>
         <h2>Login</h2>
         <form @submit.prevent="handleSubmit">
             <div class="form-group">

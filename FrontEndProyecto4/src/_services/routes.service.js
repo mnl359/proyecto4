@@ -2,7 +2,8 @@ import config from 'config';
 import { authHeader } from '../_helpers';
 
 export const routeService = {
-    getAll
+    getAll,
+    createRoute
 };
 
 function getAll() {
@@ -14,6 +15,20 @@ function getAll() {
     return fetch(`${config.apiUrl}/routes`, requestOptions).then(handleResponse);
 }
 
+
+function createRoute(name) {
+    const requestOptions = {
+        method: 'POST',
+        headers: Object.assign({}, authHeader(), { 'Content-Type': 'application/json' }),
+        body: JSON.stringify({ 'route': { name } })
+    }
+    /* http://localhost:3000/routes**/
+    return fetch(`${config.apiUrl}/routes`, requestOptions)
+    .then(handleResponse)
+    .then(route => {
+        return route;
+    });
+}
 
 function handleResponse(response) {
     return response.text().then(text => {

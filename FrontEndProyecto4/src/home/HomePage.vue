@@ -11,6 +11,18 @@
         <p>
             <router-link to="/login">Logout</router-link>
         </p>
+
+        <h2>Create route</h2>
+        <form @submit.prevent="handleSubmit">
+            <div class="form-group">
+                <label for="name"> Route name</label>
+                <input type="text" v-model="name" name="name" class="form-control" :class="{ 'is-invalid': submitted && !name }" />
+                <div v-show="submitted && !name" class="invalid-feedback"> Invalid route name</div>
+            </div>            
+            <div class="form-group">
+                <button class="btn btn-primary"> Save route </button>
+            </div>
+        </form>
     </div>
 </template>
 
@@ -26,6 +38,18 @@ export default {
     },
     created () {
         this.$store.dispatch('routes/getAll');
+    },
+    methods: {
+        handleSubmit (e) {
+            this.submitted = true;
+            const { name } = this;
+            const { dispatch } = this.$store;
+            if (name) {
+                dispatch('routes/createRoute', { name });
+            }
+            this.name = "";
+            this.submitted = false;
+        }
     }
 };
 </script>
