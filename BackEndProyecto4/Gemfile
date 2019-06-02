@@ -28,6 +28,9 @@ gem 'jwt'
 #Build services
 gem 'simple_command'
 
+#Handle CORS preflight requests
+gem 'rack-cors'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
