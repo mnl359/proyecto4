@@ -3,8 +3,18 @@ import { authHeader } from '../_helpers';
 
 export const pointService = {
     startTracking,
-    stopTracking
+    stopTracking,
+	getAll
 };
+
+function getAll(route_id) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(`${config.apiUrl}/routes/` + route_id, requestOptions).then(handleResponse);
+}
 
 var tracker, ROUTE_ID;
 function startTracking(route_id) {
