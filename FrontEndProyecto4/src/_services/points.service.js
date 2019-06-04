@@ -32,6 +32,7 @@ function trackLocation() {
 }
 
 function savePosition(position) {  
+    console.log(ROUTE_ID);
     const requestOptions = {
         method: 'POST',
         headers: Object.assign({}, authHeader(), { 'Content-Type': 'application/json' }),        
@@ -39,7 +40,7 @@ function savePosition(position) {
               'lat' : position.coords.latitude,
               'lng' : position.coords.longitude,
 			  'route_id': ROUTE_ID
-			}		
+			}
 		})
     };
 

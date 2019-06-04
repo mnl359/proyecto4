@@ -5,7 +5,7 @@
         <span v-if="routes.error" class="text-danger">ERROR: {{routes.error}}</span>
         <ul v-if="routes.items">
             <li v-for="route in routes.items">
-		<router-link :to="{ name: 'ShowRoute', params: { id: route._id.$oid } }"> {{route.name}} </router-link>
+        		<router-link :to="{ name: 'ShowRoute', params: { id: route._id.$oid } }"> {{route.name}} </router-link>
             </li>
         </ul>
         <p>
