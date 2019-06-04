@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2> Recorded points </h2>
+        <h2> {{ name }}: recorded points </h2>
             <div v-for="point in points.items">
                 {{ addPoint(point.lat, point.lng) }}
             </div>
@@ -41,6 +41,9 @@ export default {
  	computed: {
         points () {
             return this.$store.state.points.all;
+        },
+        name () {
+            return this.$store.state.points.all.name;
         }
     },
     methods: {

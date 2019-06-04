@@ -27,7 +27,7 @@ export const points = {
             state.all = { loading: true };
         },
         getAllSuccess(state, route) {
-            state.all = { items: route.points };
+            state.all = { items: route.points, name:route.name };
         },
         getAllFailure(state, error) {
             state.all = { error };

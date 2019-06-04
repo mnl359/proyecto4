@@ -55,6 +55,7 @@ export default {
             }
             this.name = "";
             this.submitted = false;
+            this.$forceUpdate();
         }
     }
 };
