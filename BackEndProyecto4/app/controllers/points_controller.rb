@@ -15,7 +15,7 @@ class PointsController < ApplicationController
 
   # POST /points
   def create
-    @route = @current_user.routes.where(:route_id => params[:route_id]).first
+    @route = @current_user.routes.find(point_params[:route_id])
     @point = @route.points.create(point_params.except(:route_id))
 
     if @point.save
