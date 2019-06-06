@@ -9,7 +9,7 @@ development:
       # Provides the hosts the default client can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
-        - localhost:27017
+        - mongodb://mongod-0.mongo-service,mongod-1.mongo-service,mongod-2.mongo-service:27017/?replSet=MainRepSet
       options:
         # Note that all options listed below are Ruby driver client options (the mongo gem).
         # Please refer to the driver documentation of the version of the mongo gem you are using
@@ -154,7 +154,7 @@ test:
     default:
       database: back_end_proyecto4_test
       hosts:
-        - localhost:27017
+        - mongodb://mongod-0.mongo-service,mongod-1.mongo-service,mongod-2.mongo-service:27017/?replSet=MainRepSet
       options:
         read:
           mode: :primary
