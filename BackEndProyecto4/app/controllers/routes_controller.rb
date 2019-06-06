@@ -41,7 +41,7 @@ class RoutesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_route
-      @route = @current_user.routes.where(:route_id => params[:route_id]).first
+      @route = @current_user.routes.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
