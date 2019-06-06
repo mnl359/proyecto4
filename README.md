@@ -40,12 +40,36 @@
 
 In the first proyect, the application was just a docker container with a local database.
 
+<p align="center">
+  <img width="300" height="400" src="https://github.com/mnl359/proyecto4/blob/master/images/project1.png">
+</p>
+
 For this project, we redisign the application in different ways:
 * We use Google Cloud with Google Kubernetes Engine (GKE) that allow us to deploy and manage with more efficiency the different services and application for this project.
 * The frontend and the backend are separate with the objective that the application is stateless so it allow us to have different intances of the application.
 * We made a load balancer, this increase the availability and the performance of the application.
 * The database has two instaces of it (primary and secondary), the secondary is a replica of the primary and they are manage by "referee" that if the primary goes down it will set the secondary as a primary until the primary could be up again.
 
-### Used technologies
+<p align="center">
+  <img width="300" height="460" src="https://github.com/mnl359/proyecto4/blob/master/images/project4.png">
+</p>
 
+### Technologies
+* **FrontEnd:** 
+   - Nodejs 
+   - Vue
+* **BackEnd:**
+   - Ruby on Rails
+* **Cloud:**
+   - Google Cloud with Google Kubernetes Engine (GKE)
+* **Database:**
+   - Mongo db 
 
+<p align="center">
+  <img width="100" height="100" src="https://www.shareicon.net/data/256x256/2015/09/11/99371_javascript_512x512.png">
+  <img width="100" height="100" src="https://cdn-images-1.medium.com/max/672/1*GrnZQhGidCAjnfE7CUyzcA.png">
+  <img width="100" height="100" src="https://cdn3.iconfinder.com/data/icons/popular-services-brands-vol-2/512/ruby-on-rails-128.png">
+  <img width="100" height="100" src="https://dashboard.snapcraft.io/site_media/appmedia/2018/04/cloud_icon_256.png">
+  <img width="100" height="100" src="https://cdn-images-1.medium.com/max/1600/1*7zB3cmxgYiu1J-KqLC5gPw.png">
+  <img width="100" height="100" src="https://nzdotnetpioneer.files.wordpress.com/2015/08/mongodb.png?w=256&h=256&crop=1">
+</p>
