@@ -8,6 +8,7 @@ RUN bundle install
 COPY . /myapp
 
 RUN rm -f /myapp/tmp/pids/server.pid
+
 EXPOSE 3000
 
 # Start the main process.

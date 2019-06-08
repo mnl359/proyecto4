@@ -34,12 +34,15 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
         inline:true,
-        port: 8080
+        port: 8080,
+	allowedHosts: [
+		'.amazonaws.com'
+	]
     },
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: 'http://localhost:3000'
+	    apiUrl: 'http://ec2-3-14-11-88.us-east-2.compute.amazonaws.com:3000'
         })
     }
 }
