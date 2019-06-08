@@ -7,11 +7,8 @@ COPY Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install
 COPY . /myapp
 
-
+RUN rm -f /myapp/tmp/pids/server.pid
 EXPOSE 3000
 
-RUN rake db:create
-RUN rake db:migrate
-run rake db:mongoid:create_indexes
 # Start the main process.
 CMD ["rails", "server", "-b", "0.0.0.0"]
