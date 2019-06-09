@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: geolocation-app
+spec:
+  selector:
+    matchLabels:
+      run: geolocation-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: geolocation-app
+    spec:
+      containers:
+      - name: geolocation-app
+        image: jcirore/proyecto4
+        ports:
+        - containerPort: 8080
+

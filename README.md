@@ -7,6 +7,8 @@
 * Juan Manuel Ciro - jcirore@eafit.edu.co
 * Juan José Suárez - jsuare32@eafit.edu.co
 
+## Application site
+
 The site is available at http://st0263.tk/
 
 ## Members roles and responsabilities
@@ -40,6 +42,26 @@ The site is available at http://st0263.tk/
       - For application: The application uses https as the protocol and also the comunication between the front end and the data base is through Jason Web Token.
       - For database: writing to database is only possible by accessing with user and password. Besides, database is no exposed through internet. Instead, it can be accessed only from inside the cluster to communicate with the pods that need it. 
 
+## Technologies
+* **Cloud:**
+   - Google Cloud with Google Kubernetes Engine (GKE)
+* **FrontEnd:** 
+   - Nodejs 
+   - Vue
+* **BackEnd:**
+   - Ruby on Rails
+* **Database:**
+   - MongoDB
+
+<p align="center">
+  <img width="100" height="100" src="https://www.shareicon.net/data/256x256/2015/09/11/99371_javascript_512x512.png">
+  <img width="100" height="100" src="https://cdn-images-1.medium.com/max/672/1*GrnZQhGidCAjnfE7CUyzcA.png">
+  <img width="100" height="100" src="https://cdn3.iconfinder.com/data/icons/popular-services-brands-vol-2/512/ruby-on-rails-128.png">
+  <img width="100" height="100" src="https://dashboard.snapcraft.io/site_media/appmedia/2018/04/cloud_icon_256.png">
+  <img width="100" height="100" src="https://cdn-images-1.medium.com/max/1600/1*7zB3cmxgYiu1J-KqLC5gPw.png">
+  <img width="100" height="100" src="https://nzdotnetpioneer.files.wordpress.com/2015/08/mongodb.png?w=256&h=256&crop=1">
+</p>
+
 ## Architecture
 
 In the first project, the application was just a docker container with a local database.
@@ -58,22 +80,56 @@ For this project, we redisign the application in different ways:
   <img width="300" height="460" src="https://github.com/mnl359/proyecto4/blob/master/images/project4.png">
 </p>
 
-### Technologies
-* **FrontEnd:** 
-   - Nodejs 
-   - Vue
-* **BackEnd:**
-   - Ruby on Rails
-* **Cloud:**
-   - Google Cloud with Google Kubernetes Engine (GKE)
-* **Database:**
-   - MongoDB
+It is important to note that both database, frontedn and backend can scale to have as much replicas as the developer wants.
 
-<p align="center">
-  <img width="100" height="100" src="https://www.shareicon.net/data/256x256/2015/09/11/99371_javascript_512x512.png">
-  <img width="100" height="100" src="https://cdn-images-1.medium.com/max/672/1*GrnZQhGidCAjnfE7CUyzcA.png">
-  <img width="100" height="100" src="https://cdn3.iconfinder.com/data/icons/popular-services-brands-vol-2/512/ruby-on-rails-128.png">
-  <img width="100" height="100" src="https://dashboard.snapcraft.io/site_media/appmedia/2018/04/cloud_icon_256.png">
-  <img width="100" height="100" src="https://cdn-images-1.medium.com/max/1600/1*7zB3cmxgYiu1J-KqLC5gPw.png">
-  <img width="100" height="100" src="https://nzdotnetpioneer.files.wordpress.com/2015/08/mongodb.png?w=256&h=256&crop=1">
-</p>
+## Deployment
+
+For this architecture your fisrt deployment should be the database then the application images and finally the  ingress controler with nginx.
+
+### Requirements
+
+To deploy this project, you have to install:
+
+* gcloud
+* kubectl
+* helm
+
+### Database
+
+All the yaml files for the database are in the MongoConf directory.
+
+### Application images
+
+All the yaml files for the ingress controller and application images are in the IngressConf directory.
+
+Before installing the application images, install Tiller with RBCA enabled into the kubernetes cluster.
+
+~~~~
+kubectl create serviceaccount --namespace kube-system tiller
+kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+helm init --service-account tiller
+~~~~
+
+Then deploy de image as a deployment.
+
+`kubectl apply -f geolocation app.yaml`
+
+Deploy the geolocation app as a service.
+
+`kubectl expose deployment geolocation-app`
+
+### Ingress controller
+
+All the yaml files for the ingress controller and application images are in the IngressConf directory.
+
+Firts, deploy an NGINX controller Deployment and Service.
+
+`helm install --name nginx-ingress stable/nginx-ingress --set rbac.create=true --set controller.publishService.enabled=true`
+
+Arter that, configure your ingress resource
+
+`kubectl apply -f ingress.yaml`
+
+To enter into the application, run the follow command and wait to Google Cloud gives you an IP.
+
+`kubectl get ingress ingress`
