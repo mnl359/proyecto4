@@ -7,6 +7,8 @@
 * Juan Manuel Ciro - jcirore@eafit.edu.co
 * Juan José Suárez - jsuare32@eafit.edu.co
 
+The site is available at http://st0263.tk/
+
 ## Members roles and responsabilities
  * Wendy Arango **-->** Database deployment.
    - Deploying MongoDB in Google Cloud with Google Kubernetes Engine (GKE).
