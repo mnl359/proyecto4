@@ -80,7 +80,7 @@ For this project, we redisign the application in different ways:
   <img width="300" height="460" src="https://github.com/mnl359/proyecto4/blob/master/images/architecture.png">
 </p>
 
-It is important to note that both database, frontedn and backend can scale to have as much replicas as the developer wants.
+It is important to note that both database, frontend and backend can scale to have as much replicas as the developer wants.
 
 ## Deployment
 
@@ -96,13 +96,14 @@ To deploy this project, you have to install:
 
 ### Database
 
-All the yaml files for the database are in the MongoConf directory.
+All the yaml files for the database are in the [MongoConf directory](https://github.com/mnl359/proyecto4/tree/master/MongoConf).
+Refer to our [Mongo Deployment file](https://github.com/mnl359/proyecto4/blob/master/MongoConf/DeployingMongo.md) to set up your database in your K8s cluster. 
 
 ### Application images
 
-All the yaml files for the ingress controller and application images are in the IngressConf directory.
+All the yaml files for the ingress controller and application images are in the [IngressConf directory](https://github.com/mnl359/proyecto4/tree/master/IngressConf).
 
-Before installing the application images, install Tiller with RBCA enabled into the kubernetes cluster.
+Before installing the application images, install Tiller with RBCA enabled into the Kubernetes cluster.
 
 ~~~~
 kubectl create serviceaccount --namespace kube-system tiller
@@ -110,7 +111,7 @@ kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admi
 helm init --service-account tiller
 ~~~~
 
-Then deploy de image as a deployment.
+Then set up the image as a deployment.
 
 `kubectl apply -f geolocation app.yaml`
 
@@ -120,13 +121,13 @@ Deploy the geolocation app as a service.
 
 ### Ingress controller
 
-All the yaml files for the ingress controller and application images are in the IngressConf directory.
+All the yaml files for the ingress controller and application images are in the [IngressConf directory](https://github.com/mnl359/proyecto4/tree/master/IngressConf).
 
-Firts, deploy an NGINX controller Deployment and Service.
+Firts, deploy a NGINX controller Deployment and Service.
 
 `helm install --name nginx-ingress stable/nginx-ingress --set rbac.create=true --set controller.publishService.enabled=true`
 
-Arter that, configure your ingress resource
+After that, configure your ingress resource
 
 `kubectl apply -f ingress.yaml`
 
