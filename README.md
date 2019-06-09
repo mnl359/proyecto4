@@ -77,7 +77,7 @@ For this project, we redisign the application in different ways:
 * The database has two instaces of it (primary and secondary), the secondary is a replica of the primary and they are manage by "referee" that if the primary goes down it will set the secondary as a primary until the primary could be up again.
 
 <p align="center">
-  <img width="300" height="460" src="https://github.com/mnl359/proyecto4/blob/master/images/project4.png">
+  <img width="300" height="460" src="https://github.com/mnl359/proyecto4/blob/master/images/architecture.png">
 </p>
 
 It is important to note that both database, frontedn and backend can scale to have as much replicas as the developer wants.
